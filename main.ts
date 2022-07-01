@@ -18,9 +18,9 @@ function render(ctx: RenderContext, render: InnerRenderFunction) {
   const snapshot = ctx.state.get("twind") as unknown[] | null;
   sheet.reset(snapshot || undefined);
   render();
-  ctx.styles.splice(0, ctx.styles.length, ...(sheet).target);
+  ctx.styles.splice(0, ctx.styles.length, ...sheet.target);
   const newSnapshot = sheet.reset();
   ctx.state.set("twind", newSnapshot);
 }
 
-await start(manifest, { render });
+await start(manifest, { port: 3000, render });
